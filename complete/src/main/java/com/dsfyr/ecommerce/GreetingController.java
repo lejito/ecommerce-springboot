@@ -1,4 +1,4 @@
-package com.example.restservice;
+package com.dsfyr.ecommerce;
 
 import java.util.concurrent.atomic.AtomicLong;
 
