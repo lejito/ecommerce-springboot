@@ -1,5 +1,5 @@
 package com.dsfyr.ecommerce.model;
-
+import com.dsfyr.ecommerce.model.Carrito;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +21,19 @@ public class Tienda {
         return productos;
     }
 
+    public boolean agregarItemCarrito(int idUsuario, String sku, int cantidad) {
+
+        for (Usuario usuario : usuarios) {
+            if (usuario.getId() == idUsuario) {
+                Producto producto = productos.stream().filter(p -> p.getSku().equals(sku)).findFirst().orElse(null);
+                if (producto == null) {
+                    return false;
+                }
+                return usuario.agregarItemAlCarrito(producto, cantidad);
+            }
+        }
+        return false;
+    }
 
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
@@ -31,11 +44,7 @@ public class Tienda {
     }
 
     public Carrito obtenerCarrito(int id) {
-        for (Usuario usuario : usuarios) {
-            if (usuario.getId() == id) {
-                return usuario.getCarrito();
-            }
-        }
-        throw new  Error("Usuario no encontrado");
+       return usuarios.stream().filter(u -> u.getId() == id).findFirst().orElse(null);
+
     }
 }

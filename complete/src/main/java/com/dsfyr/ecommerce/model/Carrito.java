@@ -10,4 +10,15 @@ public class Carrito{
         return items;
     }
 
+    public void agregarItem(Producto producto, int cantidad) {
+        Item currentItem = items.stream().filter(i -> i.getProducto().getSku().equals(producto.getSku())).findFirst().orElse(null);
+        if (currentItem === null) {
+            currentItem = new Item(producto, 0);
+        }
+
+
+        items.add(item);
+
+    }
+
 }

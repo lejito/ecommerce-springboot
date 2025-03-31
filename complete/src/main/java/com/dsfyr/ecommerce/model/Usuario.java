@@ -1,5 +1,8 @@
 package com.dsfyr.ecommerce.model;
 
+import com.dsfyr.ecommerce.model.Carrito;
+import com.dsfyr.ecommerce.model.Producto;
+
 public class Usuario {
     private String nombre;
     private int id;
@@ -22,4 +25,8 @@ public class Usuario {
     // 🔹 Setters (id no tiene setter porque es final)
     public void setNombre(String nombre) { this.nombre = nombre; }
     public void setCarrito(Carrito carrito) { this.carrito = carrito; }
+
+    public boolean agregarItemCarrito( Producto producto, int cantidad) {
+        return carrito.agregarItem(producto, cantidad);
+    }
 }

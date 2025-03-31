@@ -27,6 +27,25 @@ tambien puede ejecutar:
 ./gradlew bootRun
 ----
 ====
+Tambien puede descargar la imagen y montar la api con docker, con los siguientes pasos:
+
+* Ingrese a la URL `https://github.com/lejito/ecommerce-springboot/pkgs/container/ecommerce-springboot` , alli encontrara un comando para descargar la imagen, con el siguiente formato:
+====
+[source,bash]
+----
+docker pull ghcr.io/lejito/ecommerce-springboot:v{version}
+----
+====
+Use la version que se muestra en el paso 1, ya que otras versiones no seran el estado actual de la api.
+
+* use el comando de descarga de la imagen y una vez haya finalizado utilice el siguiente comando para montar la api:
+====
+[source,bash]
+----
+docker run --rm --name ecommerce-springboot -p 8080:8080 ghcr.io/lejito/ecommerce-springboot:v{version}
+----
+====
+
 
 Los siguiente son los endpoints disponibles:
 
