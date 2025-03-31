@@ -32,4 +32,4 @@ jobs:
          docker compose push
 
       - name: Clean Up
-        run: docker-compose down --volumes
+        run: docker compose down --volumes
