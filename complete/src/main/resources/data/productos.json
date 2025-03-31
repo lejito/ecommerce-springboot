@@ -1,0 +1,72 @@
+[
+  {
+    "sku": "SP001",
+    "nombre": "Candybar",
+    "descripcion": "An imported candy bar",
+    "precio": 2.0,
+     "stock":4
+  },
+  {
+    "sku": "SP002",
+    "nombre": "Chocolate browni",
+    "descripcion": "A delicious chocolate browni",
+    "precio": 3.0,
+     "stock":4
+  },
+  {
+    "sku": "SP003",
+    "nombre": "Bottle of water",
+    "descripcion": "A  refreshing bottle of water",
+    "precio": 1.5,
+     "stock":4
+  },
+  {
+    "sku": "EA001",
+    "nombre": "Laptop",
+    "descripcion": "A Samsung Laptop with high performance capabilities",
+    "precio": 850.0,
+     "stock":4
+  },
+  {
+    "sku": "EA002",
+    "nombre": "IPhone",
+    "descripcion": "A smartphone made by apple",
+    "precio": 625.0,
+     "stock":4
+  },
+  {
+    "sku": "EA003",
+    "nombre": "Memory stick",
+    "descripcion": "A 8GB memory stick",
+    "precio": 12.0,
+     "stock":4
+  },
+  {
+    "sku": "EA004",
+    "nombre": "Backyard table",
+    "descripcion": "A table to use in the backyard",
+    "precio": 25.0,
+     "stock":4
+  },
+  {
+    "sku": "WE001",
+    "nombre": "Apple",
+    "descripcion": "Red apples per gram",
+    "precio": 0.005,
+     "stock":4
+  },
+  {
+    "sku": "WE002",
+    "nombre": "Rice",
+    "descripcion": "Good quality rice per gram",
+    "precio": 0.003,
+     "stock":4
+  },
+  {
+    "sku": "WE003",
+    "nombre": "Peanuts",
+    "descripcion": "Brazilian peanuts per gram",
+    "precio": 0.007,
+     "stock":4
+  }
+]
