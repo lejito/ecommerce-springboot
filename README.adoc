@@ -80,3 +80,14 @@ Los siguiente son los endpoints disponibles:
 ----
 ====
 
+
+== (POST) Agregar un producto al carrito
+`http://localhost:8080/usuarios/{id}/carrito`
+====
+[source,json]
+----
+
+----
+====
+
+

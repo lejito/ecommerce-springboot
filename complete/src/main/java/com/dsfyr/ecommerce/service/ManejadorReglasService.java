@@ -1,12 +1,18 @@
-package com.dsfyr.ecommerce.model;
-
+package com.dsfyr.ecommerce.service;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
-public class ManejadorReglas {
+import com.dsfyr.ecommerce.model.ReglaPrecio;
+import com.dsfyr.ecommerce.model.ReglaPrecioNormal;
+import com.dsfyr.ecommerce.model.ReglaPrecioPorPeso;
+import com.dsfyr.ecommerce.model.ReglaPrecioEspecial;
+
+@Service
+public class ManejadorReglasService {
     private List<ReglaPrecio> reglas = new ArrayList<ReglaPrecio>();
 
-    public ManejadorReglas() {
+    public ManejadorReglasService() {
         reglas.add(new ReglaPrecioNormal());
         reglas.add(new ReglaPrecioPorPeso());
         reglas.add(new ReglaPrecioEspecial());

@@ -1,5 +1,8 @@
 package com.dsfyr.ecommerce.model;
-import com.dsfyr.ecommerce.model.Carrito;
+import com.dsfyr.ecommerce.Error.ProductoNoEncontrado;
+import com.dsfyr.ecommerce.Error.UsuarioNoEncontrado;
+import com.dsfyr.ecommerce.service.ManejadorReglasService;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,18 +24,18 @@ public class Tienda {
         return productos;
     }
 
-    public boolean agregarItemCarrito(int idUsuario, String sku, int cantidad) {
+    public Carrito agregarItemCarrito(int idUsuario, String sku, int cantidad, ManejadorReglasService manejadorReglas) {
 
-        for (Usuario usuario : usuarios) {
-            if (usuario.getId() == idUsuario) {
-                Producto producto = productos.stream().filter(p -> p.getSku().equals(sku)).findFirst().orElse(null);
-                if (producto == null) {
-                    return false;
-                }
-                return usuario.agregarItemAlCarrito(producto, cantidad);
-            }
+        Usuario usuario = usuarios.stream().filter(u -> u.getId() == idUsuario).findFirst().orElse(null);
+        if(usuario == null){
+            throw new UsuarioNoEncontrado(String.format("Usuario con ID %d no encontrado", idUsuario));
         }
-        return false;
+        Producto producto = productos.stream().filter(p -> p.getSku().equals(sku)).findFirst().orElse(null);
+        if (producto == null) {
+            throw new ProductoNoEncontrado(String.format("Producto con SKU %s no encontrado", sku));
+        }
+        usuario.agregarItemCarrito(producto, cantidad, manejadorReglas);
+        return usuario.getCarrito();
     }
 
     public void setUsuarios(List<Usuario> usuarios) {
@@ -44,7 +47,11 @@ public class Tienda {
     }
 
     public Carrito obtenerCarrito(int id) {
-       return usuarios.stream().filter(u -> u.getId() == id).findFirst().orElse(null);
+        Usuario usuario = usuarios.stream().filter(u -> u.getId() == id).findFirst().orElse(null);
+        if (usuario == null) {
+            throw new UsuarioNoEncontrado(String.format("Usuario con ID %d no encontrado", id));
+        }
+        return usuario.getCarrito();
 
     }
 }

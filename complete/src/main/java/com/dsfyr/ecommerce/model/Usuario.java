@@ -1,7 +1,5 @@
 package com.dsfyr.ecommerce.model;
-
-import com.dsfyr.ecommerce.model.Carrito;
-import com.dsfyr.ecommerce.model.Producto;
+import com.dsfyr.ecommerce.service.ManejadorReglasService;
 
 public class Usuario {
     private String nombre;
@@ -9,7 +7,9 @@ public class Usuario {
     private Carrito carrito;
 
     // 🔹 Constructor público
-    public Usuario() {}
+    public Usuario() {
+        this.carrito = new Carrito();  // Inicializa un carrito vacío
+    }
 
     public Usuario(String nombre, int id) {
         this.nombre = nombre;
@@ -26,7 +26,7 @@ public class Usuario {
     public void setNombre(String nombre) { this.nombre = nombre; }
     public void setCarrito(Carrito carrito) { this.carrito = carrito; }
 
-    public boolean agregarItemCarrito( Producto producto, int cantidad) {
-        return carrito.agregarItem(producto, cantidad);
+    public void agregarItemCarrito( Producto producto, int cantidad,ManejadorReglasService manejadorReglas) {
+        carrito.agregarItem(producto, cantidad, manejadorReglas);
     }
 }
