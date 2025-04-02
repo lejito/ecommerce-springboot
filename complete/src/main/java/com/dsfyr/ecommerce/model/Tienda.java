@@ -2,27 +2,19 @@ package com.dsfyr.ecommerce.model;
 import com.dsfyr.ecommerce.Error.ProductoNoEncontrado;
 import com.dsfyr.ecommerce.Error.UsuarioNoEncontrado;
 import com.dsfyr.ecommerce.service.ManejadorReglasService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Tienda {
-    private List<Usuario> usuarios;
-    private List<Producto> productos;
-
-    public Tienda(List<Usuario> usuarios, List<Producto> productos) {
-        this.usuarios = (usuarios != null) ? usuarios : new ArrayList<>();
-        this.productos = (productos != null) ? productos : new ArrayList<>();
-    }
-
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public List<Producto> getProductos() {
-        return productos;
-    }
+      private List<Usuario> usuarios = new ArrayList<>();
+    private List<Producto> productos = new ArrayList<>();
 
     public Carrito agregarItemCarrito(int idUsuario, String sku, int cantidad, ManejadorReglasService manejadorReglas) {
 

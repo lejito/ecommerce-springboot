@@ -1,33 +1,32 @@
 package com.dsfyr.ecommerce.exception;
-
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
-import java.util.HashMap;
-import java.util.Map;
+import com.dsfyr.ecommerce.DTO.ResponseDTO;
+import com.dsfyr.ecommerce.Error.CustomError;
+import org.springframework.http.ResponseEntity;
 
 @ControllerAdvice  // Actúa como middleware para manejar errores
 public class ControlGlobalErrores {
 
-    // Captura excepciones específicas (Ejemplo: ResponseStatusException)
+   
+    
     @ExceptionHandler(ResponseStatusException.class)
-    public ResponseEntity<Map<String, Object>> handleResponseStatusException(ResponseStatusException ex) {
-        Map<String, Object> response = new HashMap<>();
-        response.put("error", ex.getReason());
-        response.put("status", ex.getStatusCode().value());
-
-        return new ResponseEntity<>(response, ex.getStatusCode());
+    public ResponseEntity<ResponseDTO> handleResponseStatusException(ResponseStatusException ex) {
+        ResponseDTO response = new ResponseDTO(ex.getReason(), false, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
-
-    // Captura cualquier otra excepción no manejada
+    
+    // Manejo de excepciones genéricas
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
-        Map<String, Object> response = new HashMap<>();
-        response.put("error", "Error interno en el servidor");
-        response.put("message", ex.getMessage());
-
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ResponseDTO> handleGenericException(Exception ex) {
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        if (ex instanceof CustomError) {
+            status = HttpStatus.BAD_REQUEST;
+        }
+        ResponseDTO response = new ResponseDTO(ex.getMessage(), false, status);
+        return ResponseEntity.status(status).body(response);
     }
+    
 }

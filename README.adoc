@@ -19,14 +19,6 @@ tambien puede ejecutar:
 ----
 ====
 
-ó
-
-====
-[source,bash]
-----
-./gradlew bootRun
-----
-====
 Tambien puede descargar la imagen y montar la api con docker, con los siguientes pasos:
 
 * Ingrese a la URL `https://github.com/lejito/ecommerce-springboot/pkgs/container/ecommerce-springboot` , alli encontrara un comando para descargar la imagen, con el siguiente formato:
@@ -46,6 +38,8 @@ docker run --rm --name ecommerce-springboot -p 8080:8080 ghcr.io/lejito/ecommerc
 ----
 ====
 
+puede ver los endpoints entrando a la documentacion de swagger:
+`http://localhost:8080/swagger-ui.html`
 
 Los siguiente son los endpoints disponibles:
 

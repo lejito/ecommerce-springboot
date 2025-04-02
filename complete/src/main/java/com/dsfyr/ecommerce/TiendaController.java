@@ -7,17 +7,18 @@ import com.dsfyr.ecommerce.model.Carrito;
 import com.dsfyr.ecommerce.service.JsonDataLoaderService;
 import com.dsfyr.ecommerce.service.ManejadorReglasService;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.dsfyr.ecommerce.DTO.*;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.HttpStatus;
 import java.util.List;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import jakarta.validation.Valid;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/tienda")  // Prefijo para todas las rutas
+@Tag(name = "Tienda", description = "Endpoints para gestionar la tienda")
 public class TiendaController {
 
     private final Tienda tienda;  // Se declara `final` porque se inyecta en el constructor
@@ -32,30 +33,34 @@ public class TiendaController {
 
     // Obtener todos los usuarios (Spring lo convierte automáticamente a JSON)
     @GetMapping("/usuarios")
-    public List<Usuario> usuarios() {
-        return tienda.getUsuarios();
+    @Operation(summary = "Listar usuarios", description = "Obtiene la lista de usuarios de la aplicación")
+    public ResponseDTO usuarios() {
+        return new ResponseDTO("Lista de usuarios", true, tienda.getUsuarios(), HttpStatus.OK);
     }
 
     //  Obtener el carrito de un usuario por ID
     @GetMapping("/usuarios/{id}/carrito")
-    public Carrito obtenerCarrito(@PathVariable int id) {
+    @Operation(summary = "Obtener carrito", description = "Obtiene el carrito de un usuario por ID")
+    public ResponseDTO obtenerCarrito(@PathVariable int id) {
         Carrito carrito = tienda.obtenerCarrito(id);
-        return carrito;
+        return new ResponseDTO("Carrito del usuario", true, carrito, HttpStatus.OK);
        
         
     }
 
     // Obtener todos los productos (Spring lo convierte automáticamente a JSON)
     @GetMapping("/productos")
-    public List<Producto> productos() {
-        return tienda.getProductos();
+    @Operation(summary = "Listar productos", description = "Obtiene la lista de prucductos disponibles en la aplicación")
+    public ResponseDTO productos() {
+        return new ResponseDTO("Lista de productos", true, tienda.getProductos(), HttpStatus.OK);
     }
 
     // Ruta para agregar un producto al carrito
     @PostMapping("/usuarios/{id}/carrito")
-    public Carrito agregarProductoAlCarrito(@PathVariable int id, @Valid @RequestBody RequestBodyAgregarCarritoDTO requestBody) {
+    @Operation(summary = "Agregar un producto al carrito", description = "Agregar un producto al carrito de un usuario por ID")
+    public ResponseDTO agregarProductoAlCarrito(@PathVariable int id, @Valid @RequestBody RequestBodyAgregarCarritoDTO requestBody) {
             Carrito carrito = tienda.agregarItemCarrito(id, requestBody.getSku(), requestBody.getCantidad(), manejadorReglas);
-            return carrito;
+            return new ResponseDTO("Producto agregado al carrito", true, carrito, HttpStatus.CREATED);
     
     }
        

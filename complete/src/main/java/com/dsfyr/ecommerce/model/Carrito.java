@@ -6,12 +6,16 @@ import  java.util.ArrayList;
 import  java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@NoArgsConstructor
+@Data
 public class Carrito{
     private List<Item> items = new ArrayList<>();
 
-    public List<Item> getItems() {
-        return items;
-    }
     @JsonProperty("total")
     public double getTotal() {
         return items.stream()
@@ -19,11 +23,6 @@ public class Carrito{
                     .sum();
     }
 
-    @JsonProperty("items")
-    public List<Item> getCalculatedItems() {
-        return items;
-    }
-    
     public void agregarItem(Producto producto, int cantidad,ManejadorReglasService manejadorReglas) {
         Item currentItem = items.stream().filter(i -> i.getProducto().getSku().equals(producto.getSku())).findFirst().orElse(null);
         if (currentItem == null) { 

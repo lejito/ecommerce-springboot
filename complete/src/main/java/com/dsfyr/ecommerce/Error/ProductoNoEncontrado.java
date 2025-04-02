@@ -1,6 +1,6 @@
 package com.dsfyr.ecommerce.Error;
 
-public class ProductoNoEncontrado extends RuntimeException {
+public class ProductoNoEncontrado extends CustomError {
     public ProductoNoEncontrado(String message) {
         super(message);
     }
