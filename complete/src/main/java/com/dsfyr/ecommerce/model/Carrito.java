@@ -37,4 +37,22 @@ public class Carrito{
         currentItem.setCantidad(currentItem.getCantidad() + cantidad);
     }
 
+    public void reducirCantidadItem(String sku, int cantidad, ManejadorReglasService manejadorReglas) {
+        Item item = items.stream()
+                         .filter(i -> i.getProducto().getSku().equals(sku))
+                         .findFirst()
+                         .orElse(null);
+    
+        if (item == null) { 
+            throw new IllegalArgumentException("El producto con SKU " + sku + " no está en el carrito.");
+        }
+    
+        if (item.getCantidad() <= cantidad) {
+            items.remove(item); // Si la cantidad es menor o igual a la existente, eliminar el producto
+        } else {
+            item.setCantidad(item.getCantidad() - cantidad); // Si la cantidad es mayor, reducir la cantidad
+        }
+    }
+    
+    
 }

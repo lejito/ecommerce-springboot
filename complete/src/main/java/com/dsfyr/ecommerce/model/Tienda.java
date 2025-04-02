@@ -20,11 +20,11 @@ public class Tienda {
 
         Usuario usuario = usuarios.stream().filter(u -> u.getId() == idUsuario).findFirst().orElse(null);
         if(usuario == null){
-            throw new UsuarioNoEncontrado(String.format("Usuario con ID %d no encontrado", idUsuario));
+            throw new UsuarioNoEncontrado("Usuario con ID %d no encontrado".formatted(idUsuario));
         }
         Producto producto = productos.stream().filter(p -> p.getSku().equals(sku)).findFirst().orElse(null);
         if (producto == null) {
-            throw new ProductoNoEncontrado(String.format("Producto con SKU %s no encontrado", sku));
+            throw new ProductoNoEncontrado("Producto con SKU %s no encontrado".formatted(sku));
         }
         usuario.agregarItemCarrito(producto, cantidad, manejadorReglas);
         return usuario.getCarrito();
@@ -41,7 +41,7 @@ public class Tienda {
     public Carrito obtenerCarrito(int id) {
         Usuario usuario = usuarios.stream().filter(u -> u.getId() == id).findFirst().orElse(null);
         if (usuario == null) {
-            throw new UsuarioNoEncontrado(String.format("Usuario con ID %d no encontrado", id));
+            throw new UsuarioNoEncontrado("Usuario con ID %d no encontrado".formatted(id));
         }
         return usuario.getCarrito();
 

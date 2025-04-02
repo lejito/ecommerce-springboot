@@ -1,72 +1,114 @@
 [
   {
-    "sku": "SP001",
-    "nombre": "Candybar",
-    "descripcion": "An imported candy bar",
+    "sku": "AL001",
+    "nombre": "Barra de chocolate",
+    "descripcion": "Una deliciosa barra de chocolate importada",
     "precio": 2.0,
-     "stock":4
+    "stock": 12
   },
   {
-    "sku": "SP002",
-    "nombre": "Chocolate browni",
-    "descripcion": "A delicious chocolate browni",
+    "sku": "AL002",
+    "nombre": "Brownie de chocolate",
+    "descripcion": "Un exquisito brownie de chocolate",
     "precio": 3.0,
-     "stock":4
+    "stock": 8
   },
   {
-    "sku": "SP003",
-    "nombre": "Bottle of water",
-    "descripcion": "A  refreshing bottle of water",
+    "sku": "AL003",
+    "nombre": "Botella de agua",
+    "descripcion": "Una refrescante botella de agua",
     "precio": 1.5,
-     "stock":4
+    "stock": 18
   },
   {
-    "sku": "EA001",
-    "nombre": "Laptop",
-    "descripcion": "A Samsung Laptop with high performance capabilities",
+    "sku": "EL001",
+    "nombre": "Laptop Samsung",
+    "descripcion": "Una laptop Samsung de alto rendimiento",
     "precio": 850.0,
-     "stock":4
+    "stock": 5
   },
   {
-    "sku": "EA002",
-    "nombre": "IPhone",
-    "descripcion": "A smartphone made by apple",
+    "sku": "EL002",
+    "nombre": "Teléfono Apple",
+    "descripcion": "Un teléfono inteligente de Apple",
     "precio": 625.0,
-     "stock":4
+    "stock": 7
   },
   {
-    "sku": "EA003",
-    "nombre": "Memory stick",
-    "descripcion": "A 8GB memory stick",
+    "sku": "EL003",
+    "nombre": "Memoria USB",
+    "descripcion": "Una memoria USB de 8GB",
     "precio": 12.0,
-     "stock":4
+    "stock": 20
   },
   {
-    "sku": "EA004",
-    "nombre": "Backyard table",
-    "descripcion": "A table to use in the backyard",
+    "sku": "EL004",
+    "nombre": "Mesa para jardín",
+    "descripcion": "Una mesa resistente para usar en el jardín",
     "precio": 25.0,
-     "stock":4
+    "stock": 9
   },
   {
-    "sku": "WE001",
-    "nombre": "Apple",
-    "descripcion": "Red apples per gram",
+    "sku": "FR001",
+    "nombre": "Manzana Roja",
+    "descripcion": "Manzanas rojas frescas por gramo",
     "precio": 0.005,
-     "stock":4
+    "stock": 15
   },
   {
-    "sku": "WE002",
-    "nombre": "Rice",
-    "descripcion": "Good quality rice per gram",
+    "sku": "FR002",
+    "nombre": "Arroz Premium",
+    "descripcion": "Arroz de alta calidad por gramo",
     "precio": 0.003,
-     "stock":4
+    "stock": 20
   },
   {
-    "sku": "WE003",
-    "nombre": "Peanuts",
-    "descripcion": "Brazilian peanuts per gram",
+    "sku": "FR003",
+    "nombre": "Maní",
+    "descripcion": "Maní brasileño por gramo",
     "precio": 0.007,
-     "stock":4
+    "stock": 10
+  },
+  {
+    "sku": "VE001",
+    "nombre": "Lechuga",
+    "descripcion": "Lechuga fresca por unidad",
+    "precio": 1.0,
+    "stock": 14
+  },
+  {
+    "sku": "VE002",
+    "nombre": "Tomate",
+    "descripcion": "Tomates frescos por kilo",
+    "precio": 2.5,
+    "stock": 19
+  },
+  {
+    "sku": "VE003",
+    "nombre": "Zanahoria",
+    "descripcion": "Zanahorias frescas por kilo",
+    "precio": 1.8,
+    "stock": 16
+  },
+  {
+    "sku": "BE001",
+    "nombre": "Café Molido",
+    "descripcion": "Café molido premium en paquete de 500g",
+    "precio": 7.0,
+    "stock": 11
+  },
+  {
+    "sku": "BE002",
+    "nombre": "Té Verde",
+    "descripcion": "Té verde en bolsitas, caja de 25 unidades",
+    "precio": 5.5,
+    "stock": 13
+  },
+  {
+    "sku": "BE003",
+    "nombre": "Jugo de naranja",
+    "descripcion": "Jugo de naranja natural en botella de 1L",
+    "precio": 3.0,
+    "stock": 17
   }
 ]
