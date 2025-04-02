@@ -5,7 +5,7 @@ FROM maven:3.9.6-eclipse-temurin-21 AS builder
 WORKDIR /app
 
 #copia el proyecto al contenedor
-COPY . /app
+COPY complete /app
 
 # generar el archivo JAR
 RUN mvn clean package -DskipTests
