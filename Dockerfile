@@ -1,5 +1,5 @@
 # Etapa 1: Build de la aplicación
-FROM maven:3.9.6-eclipse-temurin-21 AS builder
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 
 # Establecer el directorio de trabajo
 WORKDIR /app
@@ -11,7 +11,7 @@ COPY complete /app
 RUN mvn clean package -DskipTests
 
 # Etapa 2: Imagen final para ejecución
-FROM openjdk:24-jdk-slim
+FROM openjdk:17-jdk-slim
 
 # Directorio de trabajo en la imagen final
 WORKDIR /app
