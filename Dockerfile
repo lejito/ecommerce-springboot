@@ -1,26 +1,22 @@
 # Etapa 1: Build de la aplicación
-FROM maven:3.9.6-eclipse-temurin-17 AS builder
+FROM maven:3.9.6-eclipse-temurin-21 AS builder
 
-# Establecer el directorio de trabajo
+# Crear un directorio de trabajo
 WORKDIR /app
 
-# Copiar archivos del proyecto
-COPY complete /app
+#copia el proyecto al contenedor
+COPY . /app
 
-# Construir el JAR con Maven
+# generar el archivo JAR
 RUN mvn clean package -DskipTests
 
 # Etapa 2: Imagen final para ejecución
-FROM openjdk:17-jdk-slim
+FROM openjdk:21-jdk-slim
 
-# Directorio de trabajo en la imagen final
 WORKDIR /app
 
-# Copiar el JAR desde la etapa anterior
 COPY --from=builder /app/target/*.jar app.jar
 
-# Exponer el puerto 8080 (API REST)
 EXPOSE 8080
 
-# Comando para ejecutar la API
 CMD ["java", "-jar", "app.jar"]

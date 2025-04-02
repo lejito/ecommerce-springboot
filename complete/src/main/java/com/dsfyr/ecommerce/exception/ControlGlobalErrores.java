@@ -1,20 +1,21 @@
 package com.dsfyr.ecommerce.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 import org.springframework.web.server.ResponseStatusException;
 import com.dsfyr.ecommerce.DTO.ResponseDTO;
 import com.dsfyr.ecommerce.Error.CustomError;
 import org.springframework.http.ResponseEntity;
 
-@ControllerAdvice  // Actúa como middleware para manejar errores
+@RestControllerAdvice
 public class ControlGlobalErrores {
 
    
     
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<ResponseDTO> handleResponseStatusException(ResponseStatusException ex) {
-        ResponseDTO response = new ResponseDTO(ex.getReason(), false, HttpStatus.BAD_REQUEST);
+        ResponseDTO response = new ResponseDTO(ex.getMessage(), false, HttpStatus.BAD_REQUEST);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
     
