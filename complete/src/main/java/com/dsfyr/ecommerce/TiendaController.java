@@ -63,6 +63,14 @@ public class TiendaController {
             return new ResponseDTO("Producto agregado al carrito", true, carrito, HttpStatus.CREATED);
     
     }
+
+    // Ruta para reducir la cantidad de un producto en el carrito
+    @PostMapping("/usuarios/{id}/carrito/reducir")
+    @Operation(summary = "Reducir cantidad de un producto en el carrito", description = "Reduce la cantidad de un producto en el carrito de un usuario por ID")
+    public ResponseDTO reducirCantidadProductoCarrito(@PathVariable int id, @Valid @RequestBody RequestBodyReducirCantidadCarritoDTO requestBody) {
+        Carrito carrito = tienda.reducirCantidadItemCarrito(id, requestBody.getSku(), requestBody.getCantidad(), manejadorReglas);
+        return new ResponseDTO("Cantidad reducida en el carrito", true, carrito, HttpStatus.OK);
+    }
        
     
 

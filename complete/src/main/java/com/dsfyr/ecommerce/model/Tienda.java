@@ -30,6 +30,16 @@ public class Tienda {
         return usuario.getCarrito();
     }
 
+    public Carrito reducirCantidadItemCarrito(int idUsuario, String sku, int cantidad, ManejadorReglasService manejadorReglas) {
+        Usuario usuario = usuarios.stream().filter(u -> u.getId() == idUsuario).findFirst().orElse(null);
+        if (usuario == null) {
+            throw new UsuarioNoEncontrado("Usuario con ID %d no encontrado".formatted(idUsuario));
+        }
+        
+        usuario.getCarrito().reducirCantidadItem(sku, cantidad, manejadorReglas);
+        return usuario.getCarrito();
+    }
+
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
