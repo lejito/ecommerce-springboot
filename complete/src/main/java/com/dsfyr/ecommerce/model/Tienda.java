@@ -30,13 +30,13 @@ public class Tienda {
         return usuario.getCarrito();
     }
 
-    public Carrito reducirCantidadItemCarrito(int idUsuario, String sku, int cantidad, ManejadorReglasService manejadorReglas) {
+    public Carrito reducirCantidadItemCarrito(int idUsuario, String sku, int cantidad) {
         Usuario usuario = usuarios.stream().filter(u -> u.getId() == idUsuario).findFirst().orElse(null);
         if (usuario == null) {
             throw new UsuarioNoEncontrado("Usuario con ID %d no encontrado".formatted(idUsuario));
         }
         
-        usuario.getCarrito().reducirCantidadItem(sku, cantidad, manejadorReglas);
+        usuario.getCarrito().reducirCantidadItem(sku, cantidad);
         return usuario.getCarrito();
     }
 

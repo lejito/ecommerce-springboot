@@ -1,5 +1,6 @@
 package com.dsfyr.ecommerce.model;
 import com.dsfyr.ecommerce.Error.CantidadNoValida;
+import com.dsfyr.ecommerce.Error.ItemNoEcontrado;
 import com.dsfyr.ecommerce.service.ManejadorReglasService;
 
 import  java.util.ArrayList;
@@ -37,18 +38,21 @@ public class Carrito{
         currentItem.setCantidad(currentItem.getCantidad() + cantidad);
     }
 
-    public void reducirCantidadItem(String sku, int cantidad, ManejadorReglasService manejadorReglas) {
+    public void reducirCantidadItem(String sku, int cantidad) {
         Item item = items.stream()
                          .filter(i -> i.getProducto().getSku().equals(sku))
                          .findFirst()
                          .orElse(null);
     
         if (item == null) { 
-            throw new IllegalArgumentException("El producto con SKU " + sku + " no está en el carrito.");
+            throw new ItemNoEcontrado("El producto con SKU " + sku + " no está en el carrito.");
         }
     
-        if (item.getCantidad() <= cantidad) {
-            items.remove(item); // Si la cantidad es menor o igual a la existente, eliminar el producto
+        if (item.getCantidad() < cantidad) {
+            throw new CantidadNoValida("La cantidad a reducir es mayor que la cantidad en el carrito.");
+        }
+        if (item.getCantidad() == cantidad) {
+            items.remove(item); // Si la cantidad es igual a la existente, eliminar el producto
         } else {
             item.setCantidad(item.getCantidad() - cantidad); // Si la cantidad es mayor, reducir la cantidad
         }
