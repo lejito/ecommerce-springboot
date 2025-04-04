@@ -17,18 +17,18 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/tienda")  // Prefijo para todas las rutas
+@RequestMapping("/tienda") // Prefijo para todas las rutas
 @Tag(name = "Tienda", description = "Endpoints para gestionar la tienda")
 public class TiendaController {
-
-    private final Tienda tienda;  // Se declara `final` porque se inyecta en el constructor
+    private final Tienda tienda; // Se declara `final` porque se inyecta en el constructor
     private final ManejadorReglasService manejadorReglas; // Se declara `final` porque se inyecta en el constructor
+
     // Inyección de dependencia
     public TiendaController(JsonDataLoaderService jsonDataLoaderService, ManejadorReglasService manejadorReglas) {
         List<Usuario> usuarios = jsonDataLoaderService.cargarUsuarios();
         List<Producto> productos = jsonDataLoaderService.cargarProductos();
         this.tienda = new Tienda(usuarios, productos);
-        this.manejadorReglas = manejadorReglas; 
+        this.manejadorReglas = manejadorReglas;
     }
 
     // Obtener todos los usuarios (Spring lo convierte automáticamente a JSON)
@@ -38,14 +38,13 @@ public class TiendaController {
         return new ResponseDTO("Lista de usuarios", true, tienda.getUsuarios(), HttpStatus.OK);
     }
 
-    //  Obtener el carrito de un usuario por ID
+    // Obtener el carrito de un usuario por ID
     @GetMapping("/usuarios/{id}/carrito")
     @Operation(summary = "Obtener carrito", description = "Obtiene el carrito de un usuario por ID")
     public ResponseDTO obtenerCarrito(@PathVariable int id) {
         Carrito carrito = tienda.obtenerCarrito(id);
         return new ResponseDTO("Carrito del usuario", true, carrito, HttpStatus.OK);
-       
-        
+
     }
 
     // Obtener todos los productos (Spring lo convierte automáticamente a JSON)
@@ -58,20 +57,27 @@ public class TiendaController {
     // Ruta para agregar un producto al carrito
     @PostMapping("/usuarios/{id}/carrito")
     @Operation(summary = "Agregar un producto al carrito", description = "Agregar un producto al carrito de un usuario por ID")
-    public ResponseDTO agregarProductoAlCarrito(@PathVariable int id, @Valid @RequestBody RequestBodyAgregarCarritoDTO requestBody) {
-            Carrito carrito = tienda.agregarItemCarrito(id, requestBody.getSku(), requestBody.getCantidad(), manejadorReglas);
-            return new ResponseDTO("Producto agregado al carrito", true, carrito, HttpStatus.CREATED);
-    
+    public ResponseDTO agregarProductoAlCarrito(@PathVariable int id,
+            @Valid @RequestBody RequestBodyAgregarCarritoDTO requestBody) {
+        Carrito carrito = tienda.agregarItemCarrito(id, requestBody.getSku(), requestBody.getCantidad(),
+                manejadorReglas);
+        return new ResponseDTO("Producto agregado al carrito", true, carrito, HttpStatus.CREATED);
+
     }
 
     // Ruta para reducir la cantidad de un producto en el carrito
     @DeleteMapping("/usuarios/{id}/carrito")
     @Operation(summary = "Reducir cantidad o eliminar item en el carrito", description = "Reduce la cantidad de un producto en el carrito de un usuario por ID")
-    public ResponseDTO reducirCantidadProductoCarrito(@PathVariable int id, @Valid @RequestBody RequestBodyReducirCantidadCarritoDTO requestBody) {
+    public ResponseDTO reducirCantidadProductoCarrito(@PathVariable int id,
+            @Valid @RequestBody RequestBodyReducirCantidadCarritoDTO requestBody) {
         Carrito carrito = tienda.reducirCantidadItemCarrito(id, requestBody.getSku(), requestBody.getCantidad());
         return new ResponseDTO("Cantidad reducida en el carrito", true, carrito, HttpStatus.OK);
     }
-       
-    
 
+    @PostMapping("/usuarios/{id}/carrito/confirmar")
+    @Operation(summary = "Confirmar compra", description = "Confirmar la compra de los items en el carrito de un usuario por ID")
+    public ResponseDTO confirmarCompra(@PathVariable int id) {
+        double total = tienda.confirmarCompra(id);
+        return new ResponseDTO("Compra confirmada", true, total, HttpStatus.OK);
+    }
 }

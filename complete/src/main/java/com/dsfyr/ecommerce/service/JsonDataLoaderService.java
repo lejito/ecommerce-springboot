@@ -20,11 +20,13 @@ public class JsonDataLoaderService {
     }
 
     public List<Usuario> cargarUsuarios() {
-        return leerArchivoJson("data/usuarios.json", new TypeReference<List<Usuario>>() {});
+        return leerArchivoJson("data/usuarios.json", new TypeReference<List<Usuario>>() {
+        });
     }
 
     public List<Producto> cargarProductos() {
-        return leerArchivoJson("data/productos.json", new TypeReference<List<Producto>>() {});
+        return leerArchivoJson("data/productos.json", new TypeReference<List<Producto>>() {
+        });
     }
 
     private <T> List<T> leerArchivoJson(String filePath, TypeReference<List<T>> typeReference) {
