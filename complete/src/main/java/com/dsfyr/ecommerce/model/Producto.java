@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @Data
 public  class Producto {
     @NonNull
-    public String sku;
-    public String nombre;
-    public String descripcion;
-    @JsonProperty("stock")  public int unidadesDisponibles;
-    @JsonProperty("precio")  public  float precioUnitario;
+    private String sku;
+    private String nombre;
+    private String descripcion;
+    @JsonProperty("stock")  private int unidadesDisponibles;
+    @JsonProperty("precio")  private  float precioUnitario;
 
     public boolean tieneUnidades(int cantidad) {
         return unidadesDisponibles >= cantidad;

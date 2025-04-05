@@ -74,10 +74,18 @@ public class TiendaController {
         return new ResponseDTO("Cantidad reducida en el carrito", true, carrito, HttpStatus.OK);
     }
 
+    // Ruta para confirmar la compra de los items en el carrito
     @PostMapping("/usuarios/{id}/carrito/confirmar")
     @Operation(summary = "Confirmar compra", description = "Confirmar la compra de los items en el carrito de un usuario por ID")
     public ResponseDTO confirmarCompra(@PathVariable int id) {
         double total = tienda.confirmarCompra(id);
         return new ResponseDTO("Compra confirmada", true, total, HttpStatus.OK);
+    }
+
+    // Ruta para ver el total de ventas
+    @GetMapping("/ventas")
+    @Operation(summary = "Ver total de ventas", description = "Obtiene el total de ventas realizadas")
+    public ResponseDTO totalVentas() {
+        return new ResponseDTO("Total de ventas", true, tienda.getTotalVentas(), HttpStatus.OK);
     }
 }
